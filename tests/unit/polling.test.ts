@@ -94,5 +94,8 @@ test("refresh timestamp tracking", () => {
 });
 
 test("jitteredInterval with 'none' mode and custom rng", () => {
-  assert.equal(jitteredInterval(10_000, "none", () => 0.75), 10_000);
+  assert.equal(
+    jitteredInterval(10_000, "none", () => 0.75),
+    10_000,
+  );
 });

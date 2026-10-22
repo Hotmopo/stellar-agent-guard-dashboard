@@ -81,7 +81,6 @@ function nonNegativeAmountField(label: string) {
   });
 }
 
-
 const protocolRuleSchema = z.object({
   contract: addressField("allowed_protocols contract"),
   functions: z
@@ -91,20 +90,25 @@ const protocolRuleSchema = z.object({
 
 const assetCapEntrySchema = z.object({
   asset_contract_address: addressField("per_asset_caps asset_contract_address"),
-  max_cap_stroops: z.string().refine(
-    (value) => /^\d+$/.test(value) && BigInt(value) > 0n && BigInt(value) <= BigInt(Number.MAX_SAFE_INTEGER),
-    {
-      message: "per_asset_caps max_cap_stroops must be a positive whole number not exceeding i128 max",
-    },
-  ),
+  max_cap_stroops: z
+    .string()
+    .refine(
+      (value) =>
+        /^\d+$/.test(value) &&
+        BigInt(value) > 0n &&
+        BigInt(value) <= BigInt(Number.MAX_SAFE_INTEGER),
+      {
+        message:
+          "per_asset_caps max_cap_stroops must be a positive whole number not exceeding i128 max",
+      },
+    ),
   symbol: z.string().min(1, "per_asset_caps symbol is required"),
 });
 
-const amountFieldSchema = z.string().refine(
-  (value) => /^\d*$/.test(value), {
-    message: "amount must be a non-negative whole number of units (digits only), blank to disable; maximum i128 value",
-  },
-);
+const amountFieldSchema = z.string().refine((value) => /^\d*$/.test(value), {
+  message:
+    "amount must be a non-negative whole number of units (digits only), blank to disable; maximum i128 value",
+});
 
 export const policyExportSchemaV1 = z.object({
   version: z.number().refine((value) => value === POLICY_SCHEMA_VERSION, {

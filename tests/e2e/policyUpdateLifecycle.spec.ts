@@ -41,12 +41,10 @@ test.describe("policy update lifecycle: submit and wallet rejection", () => {
     await page.getByPlaceholder("1000").fill("1000");
     await page.getByPlaceholder("5000").fill("5000");
     await page.getByRole("button", { name: "Deploy guard" }).click();
-    await expect(
-      page.getByText("Deployed and verified against the pinned artifact"),
-    ).toBeVisible({ timeout: 60_000 });
-    await expect(
-      page.getByText("Pinned bytecode already on chain"),
-    ).toBeVisible();
+    await expect(page.getByText("Deployed and verified against the pinned artifact")).toBeVisible({
+      timeout: 60_000,
+    });
+    await expect(page.getByText("Pinned bytecode already on chain")).toBeVisible();
 
     // The new guard is now selected.
     const predicted = page.locator(".stat", { hasText: "Predicted guard address" });
@@ -76,12 +74,8 @@ test.describe("policy update lifecycle: submit and wallet rejection", () => {
 
     // At this point the form re-seeds from what the chain now reports.
     // Assert the policy values are visible in the form.
-    await expect(page.locator("p.tiny.mono").first()).toContainText(
-      "per-transaction cap 1000",
-    );
-    await expect(page.locator("p.tiny.mono").first()).toContainText(
-      "rolling cap 5000 per 86400s",
-    );
+    await expect(page.locator("p.tiny.mono").first()).toContainText("per-transaction cap 1000");
+    await expect(page.locator("p.tiny.mono").first()).toContainText("rolling cap 5000 per 86400s");
 
     // ── Step 4: verify the chain read reflects the submitted policy ──────────
     // The policy panel should show the installed policy; no "no policy" banner.
@@ -110,12 +104,10 @@ test.describe("policy update lifecycle: submit and wallet rejection", () => {
     await page.getByPlaceholder("1000").fill("1000");
     await page.getByPlaceholder("5000").fill("5000");
     await page.getByRole("button", { name: "Deploy guard" }).click();
-    await expect(
-      page.getByText("Deployed and verified against the pinned artifact"),
-    ).toBeVisible({ timeout: 60_000 });
-    await expect(
-      page.getByText("Pinned bytecode already on chain"),
-    ).toBeVisible();
+    await expect(page.getByText("Deployed and verified against the pinned artifact")).toBeVisible({
+      timeout: 60_000,
+    });
+    await expect(page.getByText("Pinned bytecode already on chain")).toBeVisible();
 
     // The new guard is now selected.
     const predicted = page.locator(".stat", { hasText: "Predicted guard address" });
@@ -147,9 +139,7 @@ test.describe("policy update lifecycle: submit and wallet rejection", () => {
     await expect(page.locator(".panel", { hasText: "Guardrail policy" })).toBeVisible();
     // The form should still indicate no policy installed (or the pre-existing state).
     // Most importantly, no "landed on chain" success message should appear.
-    await expect(
-      page.getByText("set_policy landed on chain"),
-    ).not.toBeVisible({ timeout: 5_000 });
+    await expect(page.getByText("set_policy landed on chain")).not.toBeVisible({ timeout: 5_000 });
 
     // Heremety check: the mock should not have received a set_policy call
     // (or the guard state should be unchanged).

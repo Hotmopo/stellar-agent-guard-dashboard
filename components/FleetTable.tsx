@@ -140,11 +140,7 @@ export function FleetTable() {
 
   const renderError = (error?: string | null) => {
     if (!error) return null;
-    return (
-      <span className="pill danger tiny">
-        Read error: {error}
-      </span>
-    );
+    return <span className="pill danger tiny">Read error: {error}</span>;
   };
 
   return (

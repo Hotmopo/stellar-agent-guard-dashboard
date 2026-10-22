@@ -259,7 +259,10 @@ test("importPolicyFromJson rejects a malformed protocol function name", () => {
   const protocolIssue = result.issues.find(
     (issue) => issue.path === "allowed_protocols[0].functions[0]",
   );
-  assert.ok(protocolIssue, 'expected a validation issue at path "allowed_protocols[0].functions[0]"');
+  assert.ok(
+    protocolIssue,
+    'expected a validation issue at path "allowed_protocols[0].functions[0]"',
+  );
 });
 
 test("importPolicyFromJson accepts a valid large positive whole number", () => {
