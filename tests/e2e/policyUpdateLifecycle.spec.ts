@@ -137,13 +137,11 @@ test.describe("policy update lifecycle: submit and wallet rejection", () => {
 
     // No success state should be shown - the form should still show no policy.
     await expect(page.locator(".panel", { hasText: "Guardrail policy" })).toBeVisible();
-    // The form should still indicate no policy installed (or the pre-existing state).
     // Most importantly, no "landed on chain" success message should appear.
     await expect(page.getByText("set_policy landed on chain")).not.toBeVisible({ timeout: 5_000 });
 
     // Heremety check: the mock should not have received a set_policy call
     // (or the guard state should be unchanged).
-    // The guard should still have no policy.
     expect(chain.guards.get(predictedText)?.policy).toBeNull();
 
     // Reload to ensure clean state.
