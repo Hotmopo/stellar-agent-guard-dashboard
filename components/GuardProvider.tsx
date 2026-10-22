@@ -177,7 +177,6 @@ export interface GuardContextValue {
   /** Last successful chain read refresh timestamp (ms since epoch). */
   lastRefresh: number | null;
   refresh: () => Promise<void>;
-  lastRefresh: number | null;
   /** Per-read retry (issue #36): re-invoke ONLY one failed snapshot read. */
   retryRead: (field: SnapshotField) => Promise<void>;
   /** The snapshot field currently re-reading, if any. */
@@ -1271,7 +1270,6 @@ export function GuardProvider({
       snapshotError,
       refreshing,
       refresh,
-      lastRefresh,
       retryRead,
       retryingField,
       feed,

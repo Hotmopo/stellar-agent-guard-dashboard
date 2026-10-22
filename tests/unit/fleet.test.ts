@@ -147,12 +147,7 @@ describe("fleet polling", () => {
     assert.equal(rows[2]!.derivedStatus, "Active");
     assert.equal(rows[2]!.error, undefined);
 
-<<<<<<< HEAD
-    // Retry should re-read the failed guard; since the mock always returns an error,
-    // the original failure reason is preserved (recovery preserves the error).
-=======
     // Retry should preserve the original failure reason
->>>>>>> 088adec (feat: implement issues #295-297-299-300)
     const retryResult = await rows[1]!.retry!();
     assert.equal(retryResult.derivedStatus, "Unknown");
     assert.equal(retryResult.error, "RPC timeout");
