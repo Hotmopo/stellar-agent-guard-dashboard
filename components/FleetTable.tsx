@@ -344,6 +344,7 @@ export function FleetTable() {
                       >
                         Inspect
                       </button>
+<<<<<<< HEAD
                       <button
                         className="secondary"
                         style={{ padding: "4px 8px", fontSize: "0.8em" }}
@@ -352,6 +353,18 @@ export function FleetTable() {
                       >
                         Retry
                       </button>
+=======
+                      {row.retry && (
+                        <button
+                          className="secondary"
+                          style={{ padding: "4px 8px", fontSize: "0.8em" }}
+                          onClick={() => row.retry!()}
+                          disabled={row.derivedStatus !== "Unknown"}
+                        >
+                          Retry
+                        </button>
+                      )}
+>>>>>>> 088adec (feat: implement issues #295-297-299-300)
                       {row.error && (
                         <span className="tiny muted" title={row.error}>
                           ⚠
